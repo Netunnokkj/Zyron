@@ -1,7 +1,6 @@
 import {
-  ActionRowBuilder, ModalBuilder, TextInputBuilder, ApplicationCommandOptionType, EmbedBuilder, RequestManager, Embed,
+  ActionRowBuilder, ApplicationCommandOptionType, EmbedBuilder, ButtonBuilder,
 } from 'discord.js';
-import undici from 'undici';
 
 export default {
   name: 'util',
@@ -71,8 +70,9 @@ export default {
         let BoostCount = Guild.premiumSubscriptionCount === 0 ? "Sem Impulsos" : `${Guild.premiumSubscriptionCount} Impulsos ( Nível do Servidor: ${Guild.premiumTier} )`;
 
        const EmbedSP = new EmbedBuilder().setColor(client.color.default).setThumbnail(Guild.iconURL({ dynamic: true })).setAuthor({ name: `Informações do Servidor - ${Guild.name}`, iconURL: Guild.iconURL({ dynamic: true }) }).addFields({ name: `${client.e.zcoroa}${client.e.z}Dono(a):`, value: `${await client.users.fetch(Guild.ownerId)} | \`${Guild.ownerId}\``, inline: false }, { name: `${client.e.zid}${client.e.z}ID:`, value: `\`${Guild.id}\``, inline: false }, { name: `${client.e.zmembers}${client.e.z}Membros:`, value: `\`${Guild.memberCount.toLocaleString()}\``, inline: false }, { name: `${client.e.zboost}${client.e.z}Impulsos:`, value: `\`${BoostCount}\``, inline: false }, { name: `${client.e.zcalender}${client.e.z}Criado em:`, value: `<t:${~~(Guild.createdTimestamp / 1e3 )}> ( <t:${~~(Guild.createdTimestamp / 1e3 )}:R> )`, inline: false })
+       const Comp = new ActionRowBuilder().addComponents(new ButtonBuilder().setCustomId('serverinfo:button:maisdetalhes').setStyle(1))
 
-       interaction.reply({ embeds: [EmbedSP] })
+       interaction.reply({ embeds: [EmbedSP], components: [Comp] })
       } catch (e) {
         console.log(e);
       }
