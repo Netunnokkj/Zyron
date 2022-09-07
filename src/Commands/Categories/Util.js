@@ -71,7 +71,7 @@ export default {
 
        // const EmbedSP = new EmbedBuilder().setColor(client.color.default).setAuthor({ name: ``, iconURL: interaction.guild.iconURL() })
 
-        return interaction.reply(`Server ${GuildID}`)
+        return interaction.reply(`Servi ${GuildID}`)
 
       } catch (e) {
         console.log(e);
