@@ -21,6 +21,10 @@ export default {
       required: false,
     }],
   }, {
+    name: 'serverinfo',
+    description: '[ ⭐ › Utilities ] › View server information',
+    type: ApplicationCommandOptionType.Subcommand,
+  }, {
     name: 'userinfo',
     description: '[ ⭐ › Utilities ] › View a users key information',
     type: ApplicationCommandOptionType.Subcommand,
