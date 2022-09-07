@@ -83,7 +83,7 @@ export default class ZyronClient extends Client {
       } catch (err) {
       return console.log(err);
     }
-    return console.log('< Node > Comandos Carregados!');
+    return console.log('< Client > Comandos Carregados!');
   }
 
   async loadEvents(path) {
@@ -95,6 +95,6 @@ export default class ZyronClient extends Client {
         this.on(name, exec.bind(null, this));
       });
     });
-    return console.log('< Node > Eventos Carregados!');
+    return console.log('< Client > Eventos Carregados!');
   }
 }
