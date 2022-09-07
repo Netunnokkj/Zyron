@@ -89,8 +89,9 @@ export default {
              Mensagem.edit({ embeds: [EmbedSP], components: [Comp], fetchReply: true })
            }
 
+        })
         }
-        });
+      })
 
        
       } catch (e) {
