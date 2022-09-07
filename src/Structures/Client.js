@@ -76,7 +76,8 @@ export default class ZyronClient extends Client {
           this.commands.set(pull.name, pull);
           
           this.on('ready', async () => {
-            await rest.put(Routes.applicationCommands("694901042986614805"), { body: slashsArray });
+            this.application.commands.set(pull.name, pull)
+            // await rest.put(Routes.applicationCommands("694901042986614805"), { body: slashsArray });
           })
                   
          };
