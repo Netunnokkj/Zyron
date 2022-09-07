@@ -69,7 +69,7 @@ export default class ZyronClient extends Client {
           slashsArray.push({
             name: pull.name,
             description: pull.description,
-            type: commapullnd.type,
+            type: pull.type,
             options: pull.options ? pull.options : null,
           });
 
