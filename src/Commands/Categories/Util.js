@@ -73,7 +73,7 @@ export default {
       }
     } else if (interaction.options.getSubcommand() === 'serverinfo') {
       try {
-        const GuildID = await client.guilds.fetch(`${interaction.options.getString('guild')}`) || interaction.guild;
+        const GuildID = interaction.guild || await client.guilds.fetch(`${interaction.options.getString('guild')}`);
 
        // const EmbedSP = new EmbedBuilder().setColor(client.color.default).setAuthor({ name: ``, iconURL: interaction.guild.iconURL() })
 
