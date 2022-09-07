@@ -75,9 +75,8 @@ export default class ZyronClient extends Client {
           if (!command.name) return;
           this.commands.set(command.name, command);
           
-          this.on('ready', () => {
             this.application.commands.set(slashsArray);
-         });
+        
          };
         });
       } catch (err) {
