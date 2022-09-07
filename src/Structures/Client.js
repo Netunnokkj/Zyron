@@ -62,20 +62,19 @@ export default class ZyronClient extends Client {
       const slashsArray = [];
 
       readdirSync(`${path}`).forEach(async (dir) => {
-        const files = readdirSync(`${path}/${dir}`).filter((file) => file.endsWith('.js'));
+        const files = readdirSync(`${path}/${dir}`).filter(file => file.endsWith('.js'));
         for (const file of files) {
-          const pull = await import(pathToFileURL(`${path}/${dir}/${file}`).toString());
-          const command = pull.default;
+          const pull = await import(`${pathToFileURL(`${path}/${dir}/${file}`)}`).then(r => r.default);
 
           slashsArray.push({
-            name: command.name,
-            description: command.description,
-            type: command.type,
-            options: command.options ? command.options : null,
+            name: pull.name,
+            description: pull.description,
+            type: commapullnd.type,
+            options: pull.options ? pull.options : null,
           });
 
-          if (!command.name) return;
-          this.commands.set(command.name, command);
+          if (!pull.name) return;
+          this.commands.set(pull.name, pull);
           
           await rest.put(Routes.applicationCommands("694901042986614805"), { body: slashsArray });
         
