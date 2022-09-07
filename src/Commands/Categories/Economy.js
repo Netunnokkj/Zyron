@@ -427,7 +427,7 @@ const jE = new EmbedBuilder()
       if (UserDatabase.Job === 'Desempregado(a)') {
         return interaction.reply({ content: `${client.emoji.zx} **›** Você não trabalha, use </economy jobs:1013486702158958734> para conseguir um emprego.`, ephemeral: true })
       } else {
-        interaction.reply(`.`)
+        interaction.reply('.')
       }
     }
   },

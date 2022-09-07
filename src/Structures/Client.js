@@ -57,7 +57,7 @@ export default class ZyronClient extends Client {
 
   async loadCommands(path) {
     try {
-      const rest = new REST({ version: "10" }).setToken(process.env.TOKEN);
+      const rest = new REST({ version: '10' }).setToken(process.env.TOKEN);
       const slashsArray = [];
 
       readdirSync(`${path}`).forEach(async (dir) => {
