@@ -1,5 +1,5 @@
 import {
-  Client, Options, Collection, IntentsBitField
+  Client, Options, Collection, IntentsBitField, REST, Routes
 } from 'discord.js';
 import { Colors, Emojis, defMessages } from './Config.js';
 import { pathToFileURL } from 'node:url';
@@ -7,6 +7,8 @@ import { readdirSync } from 'node:fs';
 import { Database, connect } from './Database.js';
 import utils from './Utils.js';
 import disc from 'disc-functions';
+
+const rest = new REST({ version: "10" }).setToken(process.env.TOKEN);
 
 const ZyronIntents = new IntentsBitField();
 ZyronIntents.add([IntentsBitField.Flags.Guilds, IntentsBitField.Flags.GuildMembers, IntentsBitField.Flags.GuildMessages, IntentsBitField.Flags.MessageContent, IntentsBitField.Flags.GuildIntegrations, IntentsBitField.Flags.GuildPresences]);
@@ -75,7 +77,7 @@ export default class ZyronClient extends Client {
           if (!command.name) return;
           this.commands.set(command.name, command);
           
-            this.application.commands.set(slashsArray);
+          await rest.put(Routes.applicationCommands("694901042986614805"), { body: slashsArray });
         
          };
         });
