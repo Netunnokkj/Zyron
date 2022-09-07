@@ -70,9 +70,23 @@ export default {
         let BoostCount = Guild.premiumSubscriptionCount === 0 ? 'Sem Impulsos' : `${Guild.premiumSubscriptionCount} Impulsos ( Nível do Servidor: ${Guild.premiumTier} )`;
 
        const EmbedSP = new EmbedBuilder().setColor(client.color.default).setThumbnail(Guild.iconURL({ dynamic: true })).setAuthor({ name: `Informações do Servidor - ${Guild.name}`, iconURL: Guild.iconURL({ dynamic: true }) }).addFields({ name: `${client.e.zcoroa}${client.e.z}Dono(a):`, value: `${await client.users.fetch(Guild.ownerId)} | \`${Guild.ownerId}\``, inline: false }, { name: `${client.e.zid}${client.e.z}ID:`, value: `\`${Guild.id}\``, inline: false }, { name: `${client.e.zmembers}${client.e.z}Membros:`, value: `\`${Guild.memberCount.toLocaleString()}\``, inline: false }, { name: `${client.e.zboost}${client.e.z}Impulsos:`, value: `\`${BoostCount}\``, inline: false }, { name: `${client.e.zcalender}${client.e.z}Criado em:`, value: `<t:${~~(Guild.createdTimestamp / 1e3 )}> ( <t:${~~(Guild.createdTimestamp / 1e3 )}:R> )`, inline: false })
-       const Comp = new ActionRowBuilder().addComponents(new ButtonBuilder().setLabel(`Mais Detalhes`).setCustomId('serverinfo:button:maisdetalhes').setStyle(1))
+       const Comp = new ActionRowBuilder().addComponents(new ButtonBuilder().setLabel(`Mais Detalhes`).setEmoji('<:mais:1017185566015631470>').setCustomId('serverinfo:button:maisdetalhes').setStyle(2))
 
-       interaction.reply({ embeds: [EmbedSP], components: [Comp] })
+       const Mensagem = await interaction.reply({ embeds: [EmbedSP], components: [Comp], fetchReply: true })
+       const Collector = await Mensagem.createMessageComponentCollector({ componentType: 2, });
+
+       Collector.on('collect', async (i) => {
+         if (interaction.user.id !== i.user.id) return i.reply({ content: `${client.e.zx} **› ${i.user.username}**, Você não pode usar isso!`, ephemeral: true });
+         if (i.customId === 'serverinfo:button:maisdetalhes') {
+
+          const EmbedMSP = new EmbedBuilder().setColor(client.color.default).setThumbnail(Guild.iconURL({ dynamic: true })).setAuthor({ name: `Informações do Servidor - ${Guild.name}`, iconURL: Guild.iconURL({ dynamic: true }) }).addFields({ name: `${client.e.zcoroa}${client.e.z}Dono(a):`, value: `${await client.users.fetch(Guild.ownerId)} | \`${Guild.ownerId}\``, inline: false }, { name: `${client.e.zid}${client.e.z}ID:`, value: `\`${Guild.id}\``, inline: false }, { name: `${client.e.zmembers}${client.e.z}Membros:`, value: `\`${Guild.memberCount.toLocaleString()}\``, inline: false }, { name: `${client.e.zboost}${client.e.z}Impulsos:`, value: `\`${BoostCount}\``, inline: false }, { name: `${client.e.zcalender}${client.e.z}Criado em:`, value: `<t:${~~(Guild.createdTimestamp / 1e3 )}> ( <t:${~~(Guild.createdTimestamp / 1e3 )}:R> )`, inline: false })
+                
+          Mensagem.edit({ embeds: [EmbedSP, EmbedMSP], components: [], fetchReply: true })
+
+        }
+        });
+
+       
       } catch (e) {
         console.log(e);
       }
