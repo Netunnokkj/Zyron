@@ -67,12 +67,12 @@ export default {
       }
     } else if (interaction.options.getSubcommand() === 'serverinfo') {
       try {
-        const GuildID = interaction.guild;
+        const Guild = interaction.guild;
+        let BoostCount = Guild.premiumSubscriptionCount === 0 ? "Sem Impulsos" : `${Guild.premiumSubscriptionCount} Impulsos ( Nível do Servidor: ${Guild.premiumTier} )`;
 
-       // const EmbedSP = new EmbedBuilder().setColor(client.color.default).setAuthor({ name: ``, iconURL: interaction.guild.iconURL() })
+       const EmbedSP = new EmbedBuilder().setColor(client.color.default).setThumbnail(Guild.iconURL({ dynamic: true })).setAuthor({ name: `Informações do Servidor - ${Guild.name}`, iconURL: Guild.iconURL({ dynamic: true }) }).addFields({ name: `${client.e.zid}${client.e.z}ID:`, value: `\`${Guild.id}\`` }, { name: `${client.e.zcoroa}${client.e.z}Dono(a):`, value: `${client.users.fetch(Guild.ownerId)} \`${Guild.ownerId}\``, inline: true, }, { name: `${client.e.zmembers}${client.e.z}Membros:`, value: `\`${Guild.memberCount.toLocaleString()}\`` }, { name: `${client.e.zboost}${client.e.z}Impulsos:`, value: `\`${BoostCount}\`` }, { name: `${client.e.zcalender}${client.e.z}Criado em:`, value: `<t:${~~(Guild.createdTimestamp / 1e3 )}> ( <t:${~~(Guild.createdTimestamp / 1e3 )}:R> )` })
 
-        return interaction.reply(`Servi ${GuildID}`)
-
+       interaction.reply({ embeds: [EmbedSP] })
       } catch (e) {
         console.log(e);
       }
