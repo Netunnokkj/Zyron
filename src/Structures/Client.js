@@ -8,8 +8,6 @@ import { Database, connect } from './Database.js';
 import utils from './Utils.js';
 import disc from 'disc-functions';
 
-const rest = new REST({ version: "10" }).setToken(process.env.TOKEN);
-
 const ZyronIntents = new IntentsBitField();
 ZyronIntents.add([IntentsBitField.Flags.Guilds, IntentsBitField.Flags.GuildMembers, IntentsBitField.Flags.GuildMessages, IntentsBitField.Flags.MessageContent, IntentsBitField.Flags.GuildIntegrations, IntentsBitField.Flags.GuildPresences]);
 
@@ -59,6 +57,7 @@ export default class ZyronClient extends Client {
 
   async loadCommands(path) {
     try {
+      const rest = new REST({ version: "10" }).setToken(process.env.TOKEN);
       const slashsArray = [];
 
       readdirSync(`${path}`).forEach(async (dir) => {
