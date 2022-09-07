@@ -24,12 +24,6 @@ export default {
     name: 'serverinfo',
     description: '[ ⭐ › Utilities ] › View server information',
     type: ApplicationCommandOptionType.Subcommand,
-    options: [{
-      name: 'guild',
-      description: '[ 🎈 ] › Select a Guild',
-      type: ApplicationCommandOptionType.String,
-      required: false,
-    }],
   }, {
     name: 'userinfo',
     description: '[ ⭐ › Utilities ] › View a users key information',
