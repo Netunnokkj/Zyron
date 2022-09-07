@@ -77,8 +77,15 @@ export default {
        Collector.on('collect', async (i) => {
          if (interaction.user.id !== i.user.id) return i.reply({ content: `${client.e.zx} **› ${i.user.username}**, Você não pode usar isso!`, ephemeral: true });
          if (i.customId === 'serverinfo:button:maisdetalhes') {
-
-          const EmbedMSP = new EmbedBuilder().setColor(client.color.default).setThumbnail(Guild.iconURL({ dynamic: true })).setAuthor({ name: `Informações do Servidor - ${Guild.name}`, iconURL: Guild.iconURL({ dynamic: true }) }).addFields({ name: `${client.e.zcoroa}${client.e.z}Dono(a):`, value: `${await client.users.fetch(Guild.ownerId)} | \`${Guild.ownerId}\``, inline: false }, { name: `${client.e.zid}${client.e.z}ID:`, value: `\`${Guild.id}\``, inline: false }, { name: `${client.e.zmembers}${client.e.z}Membros:`, value: `\`${Guild.memberCount.toLocaleString()}\``, inline: false }, { name: `${client.e.zboost}${client.e.z}Impulsos:`, value: `\`${BoostCount}\``, inline: false }, { name: `${client.e.zcalender}${client.e.z}Criado em:`, value: `<t:${~~(Guild.createdTimestamp / 1e3 )}> ( <t:${~~(Guild.createdTimestamp / 1e3 )}:R> )`, inline: false })
+          let Channels = [
+            `Categoria(s): ${Guild.channels.cache.filter((x) => x.type == 4).size}`,
+            `Texto(s): ${Guild.channels.cache.filter((x) => x.type == 0).size}`,
+            `Voz: ${Guild.channels.cache.filter((x) => x.type == 2).size}`,
+            `Anúncios: ${Guild.channels.cache.filter((x) => x.type == 2).size}`,
+            `Fórum: ${Guild.channels.cache.filter((x) => x.type == 15).size}`,
+            `Thread's: ${Guild.channels.cache.filter((x) => x.type == 10).size + Guild.channels.cache.filter((x) => x.type == 11).size + Guild.channels.cache.filter((x) => x.type == 12).size}`,
+          ].join("\n");
+          const EmbedMSP = new EmbedBuilder().setColor(client.color.default).setThumbnail(Guild.iconURL({ dynamic: true })).addFields({ name: `${client.e.zchannel}${client.e.z}Canais de Texto ( ${Guild.channels.cache.filter((x) => x).size} ):`, value: `${Channels}`, inline: false }, { name: `${client.e.zid}${client.e.z}ID:`, value: `\`${Guild.id}\``, inline: false }, { name: `${client.e.zmembers}${client.e.z}Membros:`, value: `\`${Guild.memberCount.toLocaleString()}\``, inline: false }, { name: `${client.e.zboost}${client.e.z}Impulsos:`, value: `\`${BoostCount}\``, inline: false }, { name: `${client.e.zcalender}${client.e.z}Criado em:`, value: `<t:${~~(Guild.createdTimestamp / 1e3 )}> ( <t:${~~(Guild.createdTimestamp / 1e3 )}:R> )`, inline: false })
           const Comp2 = new ActionRowBuilder().addComponents(new ButtonBuilder().setLabel(` › Menos Detalhes`).setEmoji('<:menos:1017185599448428627>').setCustomId('serverinfo:button:menosdetalhes').setStyle(2))
           Mensagem.edit({ embeds: [EmbedSP, EmbedMSP], components: [Comp2], fetchReply: true })
           i.deferUpdate();
