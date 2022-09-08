@@ -1,7 +1,12 @@
 import {
+<<<<<<< HEAD
   ActionRowBuilder, ModalBuilder, TextInputBuilder, ApplicationCommandOptionType, EmbedBuilder, RequestManager, Embed,
 } from 'discord.js';
 import undici from 'undici';
+=======
+  ActionRowBuilder, ApplicationCommandOptionType, EmbedBuilder, ButtonBuilder,
+} from 'discord.js';
+>>>>>>> 57d35b17313438db4f7d80cc46b4facc1642769c
 
 export default {
   name: 'util',
@@ -24,12 +29,15 @@ export default {
     name: 'serverinfo',
     description: '[ ⭐ › Utilities ] › View server information',
     type: ApplicationCommandOptionType.Subcommand,
+<<<<<<< HEAD
     options: [{
       name: 'guild',
       description: '[ 🎈 ] › Select a Guild',
       type: ApplicationCommandOptionType.String,
       required: false,
     }],
+=======
+>>>>>>> 57d35b17313438db4f7d80cc46b4facc1642769c
   }, {
     name: 'userinfo',
     description: '[ ⭐ › Utilities ] › View a users key information',
@@ -73,12 +81,45 @@ export default {
       }
     } else if (interaction.options.getSubcommand() === 'serverinfo') {
       try {
+<<<<<<< HEAD
         const GuildID = interaction.guild || client.guilds.fetch(`${interaction.options.getString('guild')}`);
 
        // const EmbedSP = new EmbedBuilder().setColor(client.color.default).setAuthor({ name: ``, iconURL: interaction.guild.iconURL() })
 
         return interaction.reply(`${GuildID}`)
 
+=======
+        const Guild = interaction.guild;
+        let BoostCount = Guild.premiumSubscriptionCount === 0 ? 'Sem Impulsos' : `${Guild.premiumSubscriptionCount} Impulsos ( Nível do Servidor: ${Guild.premiumTier} )`;
+
+       const EmbedSP = new EmbedBuilder().setColor(client.color.default).setThumbnail(Guild.iconURL({ dynamic: true })).setAuthor({ name: `Informações do Servidor - ${Guild.name}`, iconURL: Guild.iconURL({ dynamic: true }) }).addFields({ name: `${client.e.zcoroa}${client.e.z}Dono(a):`, value: `<@!${Guild.ownerId}> | \`${Guild.ownerId}\``, inline: false }, { name: `${client.e.zid}${client.e.z}ID:`, value: `\`${Guild.id}\``, inline: false }, { name: `${client.e.zmembers}${client.e.z}Membros:`, value: `\`${Guild.memberCount.toLocaleString()}\``, inline: false }, { name: `${client.e.zboost}${client.e.z}Impulsos:`, value: `\`${BoostCount}\``, inline: false }, { name: `${client.e.zcalender}${client.e.z}Criado em:`, value: `<t:${~~(Guild.createdTimestamp / 1e3 )}> ( <t:${~~(Guild.createdTimestamp / 1e3 )}:R> )`, inline: false })
+       const Comp = new ActionRowBuilder().addComponents(new ButtonBuilder().setLabel(` › Mais Detalhes`).setEmoji('<:mais:1017185566015631470>').setCustomId('serverinfo:button:maisdetalhes').setStyle(2))
+       const Mensagem = await interaction.reply({ embeds: [EmbedSP], components: [Comp], fetchReply: true })
+       const Collector = await Mensagem.createMessageComponentCollector({ componentType: 2, });
+
+       Collector.on('collect', async (i) => {
+         if (interaction.user.id !== i.user.id) return i.reply({ content: `${client.e.zx} **› ${i.user.username}**, Você não pode usar isso!`, ephemeral: true });
+         if (i.customId === 'serverinfo:button:maisdetalhes') {
+          let Channels = [
+            `**› Categoria(s):** \`${Guild.channels.cache.filter((x) => x.type == 4).size}\``,
+            `**› Texto(s):** \`${Guild.channels.cache.filter((x) => x.type == 0).size}\``,
+            `**› Voz:** \`${Guild.channels.cache.filter((x) => x.type == 2).size}\``,
+            `**› Anúncios:** \`${Guild.channels.cache.filter((x) => x.type == 2).size}\``,
+            `**› Fórum:** \`${Guild.channels.cache.filter((x) => x.type == 15).size}\``,
+            `**› Thread's:** \`${Guild.channels.cache.filter((x) => x.type == 10).size + Guild.channels.cache.filter((x) => x.type == 11).size + Guild.channels.cache.filter((x) => x.type == 12).size}\``,
+          ].join("\n");
+          const EmbedMSP = new EmbedBuilder().setColor(client.color.default).setThumbnail(Guild.iconURL({ dynamic: true })).addFields({ name: `${client.e.zchannel}${client.e.z}Canais de Texto ( ${Guild.channels.cache.filter((x) => x).size} ):`, value: `${Channels}`, inline: false })
+          const Comp2 = new ActionRowBuilder().addComponents(new ButtonBuilder().setLabel(` › Menos Detalhes`).setEmoji('<:menos:1017185599448428627>').setCustomId('serverinfo:button:menosdetalhes').setStyle(2))
+          Mensagem.edit({ embeds: [EmbedSP, EmbedMSP], components: [Comp2], fetchReply: true })
+          i.deferUpdate();
+        } else if (i.customId === 'serverinfo:button:menosdetalhes') {
+          Mensagem.edit({ embeds: [EmbedSP], components: [Comp], fetchReply: true })
+          i.deferUpdate();
+        }
+      })
+
+       
+>>>>>>> 57d35b17313438db4f7d80cc46b4facc1642769c
       } catch (e) {
         console.log(e);
       }

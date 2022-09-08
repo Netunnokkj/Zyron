@@ -427,7 +427,11 @@ const jE = new EmbedBuilder()
       if (UserDatabase.Job === 'Desempregado(a)') {
         return interaction.reply({ content: `${client.emoji.zx} **›** Você não trabalha, use </economy jobs:1013486702158958734> para conseguir um emprego.`, ephemeral: true })
       } else {
+<<<<<<< HEAD
         interaction.reply(`.`)
+=======
+        interaction.reply('.')
+>>>>>>> 57d35b17313438db4f7d80cc46b4facc1642769c
       }
     }
   },

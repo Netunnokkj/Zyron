@@ -1,5 +1,9 @@
 import {
+<<<<<<< HEAD
   Client, Options, Collection, IntentsBitField
+=======
+  Client, Options, Collection, IntentsBitField, REST, Routes
+>>>>>>> 57d35b17313438db4f7d80cc46b4facc1642769c
 } from 'discord.js';
 import { Colors, Emojis, defMessages } from './Config.js';
 import { pathToFileURL } from 'node:url';
@@ -57,6 +61,7 @@ export default class ZyronClient extends Client {
 
   async loadCommands(path) {
     try {
+<<<<<<< HEAD
       const slashsArray = [];
 
       readdirSync(`${path}`).forEach(async (dir) => {
@@ -76,6 +81,32 @@ export default class ZyronClient extends Client {
           this.commands.set(command.name, command);
           
           this.application.commands.set(slashsArray);
+=======
+      const rest = new REST({ version: '10' }).setToken(process.env.TOKEN);
+      const slashsArray = [];
+
+      readdirSync(`${path}`).forEach(async (dir) => {
+        const files = readdirSync(`${path}/${dir}`).filter(file => file.endsWith('.js'));
+        for (const file of files) {
+          const pull = await import(`${pathToFileURL(`${path}/${dir}/${file}`)}`).then(r => r.default);
+
+          slashsArray.push({
+            name: pull.name,
+            description: pull.description,
+            type: pull.type,
+            options: pull.options ? pull.options : null,
+          });
+
+          if (!pull.name) return;
+          this.commands.set(pull.name, pull);
+          
+           this.on('ready', () => {
+            this.application.commands.set(slashsArray)
+           });
+            // await rest.put(Routes.applicationCommands("694901042986614805"), { body: slashsArray });
+          
+                  
+>>>>>>> 57d35b17313438db4f7d80cc46b4facc1642769c
          };
         });
       } catch (err) {

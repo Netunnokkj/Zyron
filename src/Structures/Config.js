@@ -21,7 +21,17 @@ const Emojis = {
   z7b: '<:7_black:936951440310698104>',
   zlist: '<:list:1015739906460496072>',
   zchannel: '<:channel:1015740251886592090>',
+<<<<<<< HEAD
   zvoltar: '<:voltar:1015755643317129296>'
+=======
+  zvoltar: '<:voltar:1015755643317129296>',
+  zcoroa: '<:coroa:1012434255114141836>',
+  zid: '<:id:1017171753811841055>',
+  zmembers: '<:memberss:1017174085958127626>',
+  zcalender: '<:calender:1012437650445176863>',
+  zboost: '<:bosst:1017174901016240158>',
+  zlink: '<:zlink:1017174660745547836>'
+>>>>>>> 57d35b17313438db4f7d80cc46b4facc1642769c
 };
 
 const Colors = {
