@@ -75,15 +75,13 @@ export default class ZyronClient extends Client {
           if (!command.name) return;
           this.commands.set(command.name, command);
           
-          this.on('ready', () => {
-            this.application.commands.set(slashsArray);
-         });
+          this.application.commands.set(slashsArray);
          };
         });
       } catch (err) {
       return console.log(err);
     }
-    return console.log('< Node > Comandos Carregados!');
+    return console.log('< Client > Comandos Carregados!');
   }
 
   async loadEvents(path) {
@@ -95,6 +93,6 @@ export default class ZyronClient extends Client {
         this.on(name, exec.bind(null, this));
       });
     });
-    return console.log('< Node > Eventos Carregados!');
+    return console.log('< Client > Eventos Carregados!');
   }
 }
