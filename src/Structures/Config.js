@@ -27,7 +27,12 @@ const Emojis = {
   zmembers: '<:memberss:1017174085958127626>',
   zcalender: '<:calender:1012437650445176863>',
   zboost: '<:bosst:1017174901016240158>',
-  zlink: '<:zlink:1017174660745547836>'
+  zlink: '<:zlink:1017174660745547836>',
+  zemojipaixonado: '<:emoji:1017520922091065386>',
+  zestrelafigu: '<:estrelafigu:1017521744514396230>',
+  zrole: '<:role:1017522834064560229>',
+  zbot: '<:bot:1017524674185396334>',
+  zpm: '<:policial:1017526134038069269>'
 };
 
 const Colors = {
